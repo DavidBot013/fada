@@ -20,6 +20,23 @@ def sort(lista, k):
 
     return B
 
-# Función hash.
-def hash(key:str, context:list) -> list:
-    for scene in context: # Itera sobre cada escena de la apertura ordenada
+"""
+Busca empates en las escenas de una parte y devuelve una lista de los indices de las escenas están en empate
+scenes_to_greatness: diccionario que mapea escenas a grandezas
+"""
+def check_for_draws(scenes, greatness):
+    start = 0
+    end = 0
+    draws = []
+    for i,scene in enumerate(scenes):
+        if i > 0 and greatness[i] == greatness[i-1]:
+            if not start:
+                start = i - 1
+            end = i
+        elif end != 0:
+            draws.append((start, end))
+            #for _scene in scenes[start, end+1]:
+
+            start, end = 0,0
+
+    return draws

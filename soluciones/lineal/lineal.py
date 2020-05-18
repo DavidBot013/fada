@@ -1,61 +1,77 @@
 #!/usr/bin/env python3
-import sys, json
-import pprint
 import aux
 
-N = 0
-M = 0
-K = 0
-
-parts = []
-# Se encarga de "traducir" cada línea del archivo entrada
-# a tipos de datos trabajables.
-def process_input(file):
-    with open(file) as _input:
-        lines = _input.readlines()
-    
-    global N,M,K 
-    N,M,K= int(lines[0]), int(lines[1]), int(lines[2]) 
-    
-    animals = json.loads(lines[3])
-    greatness = json.loads(lines[4])
-    global animals_dict
-    animals_dict = dict(zip(animals, greatness)) # Diccionario (animal:grandeza)
-
-    for i in range(5, (M-1)+6):
-        _part = json.loads(lines[i])
-        parts.append(_part)
- 
-scenes_greatness = []
-# Ordena la apertura. Por cada escena se crea una lista que tendrá tres tuplas (animal:valor) correspondientes
-# a los tres animales de la escena (línea 35). En la línea 36 se ordena está lista de tuplas y se reemplaza en la lista
-# de apertura(opening), en las líneas 39-44 se calculan las grandezas de cada escena y se ordena la apertura de acuerdo a esto.
-def sort_opening():
-    opening = parts[0]
-    for i,_scene in enumerate(opening): # O((m-1)*k)
-        _tuple = [(animal, animals_dict[animal]) for animal in _scene] # O(3) 
-        opening[i] = aux.sort(_tuple,N) # O(3)
+""" 
+Ordena las escenas que ocurren en la apertura.
+opening: lista, contiene las escenas de la apertura.
+N: entero, máxima grandeza.
+animals_dict: diccionario, mapea animales a grandezas, ej: {animal:grandeza}
+"""
+def sort_opening_scenes(opening, N, animals_dict):
+    sorted_opening = []
+    for scene in opening:
+        tuple = [(animal, animals_dict[animal]) for animal in scene]
+        sorted_opening.append(aux.sort(tuple,N))
         
-        _list_of_greatnesses = list( zip(*_tuple))[1] # O(3)
-        _greatness_sum = sum(_list_of_greatnesses) # Grandeza total para la escena actual.
-        scenes_greatness.append(_greatness_sum)
+    return sorted_opening 
     
-    scenes_with_greatness = list(zip(opening, scenes_greatness)) #O((m-1)*k)
-    return aux.sort(scenes_with_greatness, max(scenes_greatness))
+""" 
+Reemplaza las escenas de las m-1 partes por sus contrapartes ya ordenadas.
+parts: lista que contiene todas las partes.
+N: entero, grandeza máxima.
+animals_dict: diccionario que mapea animales a sus grandezas.
+"""
+def sort_rest_of_scenes(parts, N, animals_dict):  
+    sorted_scenes = sort_opening_scenes(parts[0], N, animals_dict)
+    # Constuir el diccionario.
+    mapping = {str(scene):sorted_scenes[i] for i,scene in enumerate(parts[0])}
     
-# Ordena las partes que ocurren después de la apertura.
-# Esto se logra por medio de un diccionario que mapea escenas de la apertura
-# sin ordenar, a escenas de la apertura ordenadas (localmente).
-def sort_rest_of_parts():
-    sorted_opening = sort_opening()
-    dic = {str(key):aux.hash( str(key), sorted_opening) for key in parts[0]}
-    pprint.pprint(dic)
-    exit()
+    for _part in parts[1:]: # parts[1:] es todas las partes sin la apertura. 
+        for k,scene in enumerate(_part): # O((M-1)*K), K escenas en las partes posteriores a la apertura.
+            _part[k] = mapping[str(scene)]
+    
+    parts[0] = sorted_scenes
 
-    #for part in parts[1:]: # O(M-1)
-     #   for scene in part: # O(K) --> O((M-1)K)
-            
-            
+"""
+Ordena las partes del evento en orden ascendente de acuerdo a su grandeza.
+parts: lista que contiene todas las partes.
+animals_to_greatness: diccionario que mapea animales a grandezas.
+"""
+def sort_parts(parts, animals_to_greatness):
+    scenes_to_greatness = {}
+    scenes_with_greatness = []
+    for scene in parts[0]: # O((m-1)k
+        total = sum((animals_to_greatness[animal] for animal in scene))
+        scenes_to_greatness[str(scene)] = total
+        scenes_with_greatness.append((scene, total))
 
-process_input(sys.argv[1])
-sort_rest_of_parts()
+    k = max(scenes_to_greatness.values())
+    parts[0] = aux.sort(scenes_with_greatness, k)
+
+    for j,part in enumerate(parts[1:]): # O(m-1)
+        scenes_with_greatness = [] # Tupla con las parejas (escena,grandeza)
+
+        for scene in part: # O((m-1)k) 
+            scenes_with_greatness.append((scene, scenes_to_greatness[str(scene)])) 
+
+        parts[j+1] = aux.sort(scenes_with_greatness, k) 
+        #draws = aux.check_for_draws(parts[j], scenes_greatness)
+        #if draws: 
+        #    solve_draws(parts[j], animals_to_greatness, draws)
+
+
+"""
+Busca empates en las escenas dadas y los resuelve.
+scenes: lista de escenas con su grandeza
+animals_to_greatness: Diccionario {animal:grandeza}
+"""
+def solve_draws(scenes, animals_to_greatness, draws):
+    result = []
+    animals_to_scenes = {}
+    x = []
+    for scene in scenes: # O((m-1)k) ó O(k)    
+        animal = scene.pop()
+        x.append((animal, hash_table[animal])) # O(1) 
+        animals_to_scenes = {animal:scene}
+
+    aux.sort(x)
