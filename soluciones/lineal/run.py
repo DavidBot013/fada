@@ -40,3 +40,5 @@ if __name__ == '__main__':
         print('*    ' + animal + ', que participó en ' + str(times) + ' escenas')
 
     print('El promedio de grandeza de todo el espectaculo fue de ' + str(lineal.get_avg(all_scenes, lineal.scenes_to_greatness)))
+    print('La escena de mayor grandeza fue ' + max(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))
+    print('La escena de menor grandeza fue ' + min(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))

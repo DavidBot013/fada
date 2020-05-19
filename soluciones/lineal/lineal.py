@@ -119,5 +119,3 @@ def get_avg(all_scenes, scenes_to_greatness):
         total += scenes_to_greatness[str(scene)]
 
     return total/len(all_scenes)
-
-
