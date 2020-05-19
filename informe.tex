@@ -17,16 +17,42 @@
 		\subsection{$O(n^2)$}
 			\textbf{Idea de la solución:}\\
 			\textbf{Estructuras de datos utilizadas:} \\
+			\textbf{Algoritmo de ordenamiento:}\\
 			\textbf{Lenguaje en el que se implementó:}
 		
 		\subsection{$O(n*\log(n))$}
 			\textbf{Idea de la solución:}\\
 			\textbf{Estructuras de datos utilizadas:} \\
+			\textbf{Algoritmo de ordenamiento:}\\
 			\textbf{Lenguaje en el que se implementó:}
 		\subsection{$O(n)$}
-			\textbf{Idea de la solución:} Después de recolectar los datos de entrada se construye una lista de tuplas a partir de la
-			lista de animales y grandezas, luego se ordena ascendentemente de acuerdo a los valores de cada tupla utilizando Counting Sort.
-			\textbf{Estructuras de datos utilizadas:} Tuplas y listas.\\
+			\textbf{Idea de la solución:} Después de recolectar los datos de entrada se construye un diccionario que mapea 
+			animales a sus respectivas grandezas a partir de la lista de animales y grandezas que se pasaron como parametro de
+			entrada. Este diccionario se usará más adelante para apoyar distintas operaciones.\\
+			Para atacar el problema se utiliza una estrategia \textit{bottom-up} 
+			\begin{enumerate}
+				\item Ordenar las escenas localmente: para que todas las escenas del evento queden ordenadas localmente solo basta con ordenar
+					las escenas de la apertura. El ordenamiento se hace con una implementación de Counting Sort que ordena una lista de 
+					tuplas (animal,grandeza) en orden ascendente de acuerdo a las grandezas. 
+				\item Ordenar las escenas de las demás partes (localmente): con el resultado del paso anterior se construye un diccionario/tabla hash
+					que relaciona escenas desordenadas con escenas ordenadas, se usa un ciclo que itera sobre cada escena de las m-1
+					partes y se reemplaza cada escena en cada parte haciendo la consulta en la tabla hash.
+				\item Ordenar todas las escenas: teniendo todas las escenas ordenadas localmente en cada parte, lo que resta es ordenar las escenas
+					dentro de sus partes de acuerdo a sus grandezas. El proceso se divide en dos, la primera parte
+					se encarga de constuir un diccionario/tabla hash que relacione escenas con su grandeza, para ello se itera sobre 
+					apertura y se calcula la grandeza de cada escena, con esta información ordenamos apertura utilizando Counting Sort.\\
+					En la segunda parte se itera sobre las siguientes $m-1$ partes y sobre las $k$ escenas de tales partes, se consulta cada escena
+					en el diccionario para hallar su grandeza y antes de cambiar a la siguiente parte, se ordenan las escenas de la parte actual
+					con Counting Sort. Al finalizar el ciclo externo las escenas dentro de cada parte están ordenadas ascendentemente.
+
+					\begin{enumerate}
+						\item Empates: se buscan y se resuelven cada que se ordenan las escenas de una parte. Para detectarlos se itera sobre
+							todas las escenas
+					\end{enumerate}
+				\item Ordenar las partes:
+			\end{enumerate}
+			\textbf{Estructuras de datos utilizadas:} Listas, tablas hash, tuplas\\
+			\textbf{Algoritmo de ordenamiento:} Counting Sort para listas de tuplas (animal, grandeza)\\
 			\textbf{Lenguaje en el que se implementó:} Python
 	\section{Análisis de Resultados}
 		\subsection{$O(n^2)$}
