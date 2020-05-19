@@ -35,8 +35,6 @@ def check_for_draws(scenes, greatness):
             end = i
         elif end != 0:
             draws.append((start, end))
-            #for _scene in scenes[start, end+1]:
-
             start, end = 0,0
 
     return draws
