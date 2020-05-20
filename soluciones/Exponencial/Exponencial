@@ -1,17 +1,26 @@
-n=6
-m=3
-k=2
-animales ={
-  "ciempies":1,
-  "libelula":2,
-  "gato":3,
-  "perro":4,
-  "tapir":5,
-  "nutria":6,
-}
-apertura = [["tapir", "nutria", "perro"], ["tapir","perro", "gato"], ["ciempies", "tapir", "gato"], ["gato", "ciempies", "libelula"]]
-parte =[[["tapir", "nutria", "perro"], ["ciempies", "tapir", "gato"]]
-        ,[["gato", "ciempies", "libelula"], ["tapir", "perro", "gato"]]]
+import sys, json
+
+n=0
+m=0
+k=0
+animales = {}
+apertura = []
+parte=[]
+
+def procesar_entrada(archivo):
+    global n,m,k,animales, apertura, parte
+    with open(archivo) as _input:
+        lineas = _input.read()
+    
+    lineas = lineas.splitlines()
+    n,m,k = int(lineas[0]), int(lineas[1]), int(lineas[2])
+    
+    animals = json.loads(lineas[3])
+    greatness = json.loads(lineas[4])
+    animales = dict(zip(animals, greatness)) # Diccionario (animal:grandeza) O(N)
+
+    apertura = json.loads(lineas[5])
+    parte = [json.loads(lineas[i]) for i in range(6, (m-1)+6)]
 
 escenaMenorGrandeza = []
 escenaMayorGrandeza = []
@@ -55,18 +64,24 @@ def ordenarApertura():
   escenaMayorGrandeza = aux[len(aux)-1]
   return escenaMayorGrandeza, escenaMenorGrandeza
 
-#def auxOrdenarPartes(array):
- # for i in range(0,len(array)):
-  #  for j in range(i+1, len(array)):
-   #   if auxEscenas(array[i]) > auxEscenas(array[j]):
-    #    aux = array[i]
-     #   array[i]=array[j]
-      #  array[j]=aux
-  #return array
-    
+def auxOrdenarPartes(array):
+  aux = 0
+  for i in range(0, len(array)):
+    aux = aux + auxEscenas(array[i])
+  return aux
+
+def partesOrdenadas(array):
+  for i in range(0,len(array)):
+    for j in range(i+1, len(array)):
+      if auxOrdenarPartes(array[i]) > auxOrdenarPartes(array[j]):
+        aux = array[i]
+        array[i]=array[j]
+        array[j]=aux
+  return array
+
 
 def ordenarPartes():
-  #aux = #auxOrdenarPartes(parte)
+  aux = partesOrdenadas(parte)
   for i in range(0,m-1):
     aux = ordenarEscenas(parte[i])
     for j in range(0,len(parte[i])):
@@ -75,7 +90,8 @@ def ordenarPartes():
 
 
 
-def zoo():
+def zoo(archivo):
+  procesar_entrada(archivo)
   ordenarApertura()
   ordenarPartes()
   #
@@ -83,6 +99,3 @@ def zoo():
   print("La escena de menor grandeza total fue la escena", escenaMenorGrandeza, "\n")
   print("La escena de mayor grandeza total fue la escena", escenaMayorGrandeza, "\n")
   #
-
-zoo()
-
