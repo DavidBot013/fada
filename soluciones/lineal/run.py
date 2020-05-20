@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import sys, json
 import itertools
-
+import cProfile
 import lineal
 
-if __name__ == '__main__':
+def solve():
     with open(sys.argv[1]) as _input:
         lines = _input.readlines()
     
@@ -43,3 +43,5 @@ if __name__ == '__main__':
     print('La escena de mayor grandeza fue ' + max(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))
     print('La escena de menor grandeza fue ' + min(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))
     print('El promedio de grandeza de todo el espectaculo fue de ' + str(lineal.get_avg(all_scenes, lineal.scenes_to_greatness)))
+
+solve()
