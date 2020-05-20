@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+from collections import defaultdict
+from itertools import chain
 # Implementación de Counting Sort
 # Ordena una lista de tuplas en orden ascendente en O(n).
 # Cada tupla tiene la forma (llave:valor) valor es un entero de 0 a k
@@ -21,20 +22,60 @@ def sort(lista, k):
     return B
 
 """
-Busca empates en las escenas de una parte y devuelve una lista de los indices de las escenas están en empate
-scenes_to_greatness: diccionario que mapea escenas a grandezas
-"""
-def check_for_draws(scenes, greatness):
-    start = 0
-    end = 0
-    draws = []
-    for i,scene in enumerate(scenes):
-        if i > 0 and greatness[i] == greatness[i-1]:
-            if not start:
-                start = i - 1
-            end = i
-        elif end != 0:
-            draws.append((start, end))
-            start, end = 0,0
+Retorna una lista de las mayores grandezas individuales de cada animal entre escenas
+que están empatadas.
+list_of_scenes: una lista de las escenas que se encuentran en empate, ej: [[animal1, animal2, animal3], [animala, animalb, animalc]]
+animals_to_greatness: una tabla hash que mapea animales a sus grandezas ej. {animal:grandeza}
 
-    return draws
+Retorna una lista de tuplas con la que sort pueda trabajar, es decir, está función NO debe hacer ningún tipo de ordenamiento.
+Su trabajo es retornar una lista de tuplas donde no haya duplicados en las grandezas [(escena, 7), (escena, 4)]
+"""
+def remove_duplicates(list_of_scenes, animals_to_greatness):
+    
+    x = [scene for scene in list_of_scenes]
+    y = [animals_to_greatness[scene[-1]] for scene in list_of_scenes]
+    
+    i = 2 
+    while i >= 0: 
+        duplicates_index = list_duplicates(y) 
+        if duplicates_index:
+            i -= 1
+            for index in duplicates_index:
+                scene = x[index]
+                y[index] = animals_to_greatness[scene[i]] 
+        else:
+            break
+    
+    return sort(list(zip(x, y)), max(y))
+    # scenes_to_indv_greatness = {
+    #         str(scene):(animals_to_greatness[scene[0]], 
+    #                     animals_to_greatness[scene[1]], 
+    #                     animals_to_greatness[scene[2]])
+    #         for scene in list_of_scenes
+    #         } #O((m-1)k) ó O(k)
+    # 
+    # 
+    # result = (list(scenes_to_indv_greatness.items()))
+   
+    # while True:
+    #     seq = (tupl[1][-1] for tupl in result)
+    #     duplicates_index = list(chain.from_iterable(list_duplicates(seq)))
+    #     if duplicates_index:
+    #         for index in duplicates_index:
+    #             result[index] = (result[index][0], result[index][1][:-1])
+    #     else:
+    #         break
+
+    # return [(list(tupl[0]), tupl[1][-1]) for tupl in result]
+
+
+def list_duplicates(lst, pack=False):
+    D = defaultdict(list)
+    for i, item in enumerate(lst):
+        D[item].append(i)
+    D = [v for v in D.values() if len(v) > 1]
+    
+    if pack:
+        return D
+    else:
+        return list(chain.from_iterable(D))
