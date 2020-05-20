@@ -12,8 +12,9 @@ animals_dict: diccionario, mapea animales a grandezas, ej: {animal:grandeza}
 def sort_opening_scenes_locally(opening, N, animals_dict):
     sorted_opening = []
     for scene in opening:
-        tuple = [(animal, animals_dict[animal]) for animal in scene]
-        sorted_opening.append(aux.sort(tuple,N))
+        tupl = [(animal, animals_dict[animal]) for animal in scene]
+        great = [animals_dict[animal] for animal in scene]
+        sorted_opening.append(aux.sort(tupl,max(great)))
         
     return sorted_opening 
     
@@ -76,7 +77,7 @@ def sort_scenes(parts, animals_to_greatness):
             current_part = parts[j+1]
             for draw in draws: # O(k/2) en el peor caso.
                 start, end = draw[0], draw[-1]
-                tie_breaker = aux.remove_duplicates(current_part[start:end+1])
+                tie_breaker = aux.remove_duplicates(current_part[start:end+1], animals_to_greatness)
                 parts[j+1][start:end+1] = tie_breaker
 
     

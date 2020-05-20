@@ -3,6 +3,6 @@
 2
 ["leon", "zorro", "cocodrilo", "jaguar", "delfin", "pinguino"]
 [7, 8, 6, 9, 10, 11]
-[["leon", "zorro", "delfin"],["pinguino", "jaguar", "cocodrilo"]]
-[["jaguar", "cocodrilo", "zorro"],["delfin", "cocodrilo", "leon"]]
-[["leon", "delfin", "pinguino"],["zorro", "jaguar", "pinguino"]]
+[["jaguar", "cocodrilo", "zorro"], ["delfin", "cocodrilo", "leon"]]
+[["jaguar", "cocodrilo", "zorro"], ["delfin", "cocodrilo", "leon"]]
+[["jaguar", "cocodrilo", "zorro"], ["delfin", "cocodrilo", "leon"]]

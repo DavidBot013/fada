@@ -15,8 +15,7 @@ def solve():
     animals_dict = dict(zip(animals, greatness)) # Diccionario (animal:grandeza) O(N)
     
 
-
-    parts = [json.loads(lines[i]) for i in range(5, (M-1)+6)]
+    parts = [json.loads(lines[i]) for i in range(5, len(lines))]
     lineal.sort_rest_of_scenes_locally(parts, N, animals_dict) 
     lineal.sort_scenes(parts, animals_dict)
     
