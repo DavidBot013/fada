@@ -17,8 +17,8 @@ if __name__ == '__main__':
 
 
     parts = [json.loads(lines[i]) for i in range(5, (M-1)+6)]
-    lineal.sortx_rest_of_scenes_locally(parts, N, animals_dict) 
-    lineal.sortx_scenes(parts, animals_dict)
+    lineal.sort_rest_of_scenes_locally(parts, N, animals_dict) 
+    lineal.sort_scenes(parts, animals_dict)
     
     all_scenes = list(itertools.chain(*parts))
     famous_animals = lineal.get_animal_ocurrences(all_scenes, animals, max)
@@ -38,7 +38,8 @@ if __name__ == '__main__':
     print('El animal que partició en menos escenas fueron: ')
     for animal,times in not_famous_animals.items():
         print('*    ' + animal + ', que participó en ' + str(times) + ' escenas')
+   
 
-    print('El promedio de grandeza de todo el espectaculo fue de ' + str(lineal.get_avg(all_scenes, lineal.scenes_to_greatness)))
     print('La escena de mayor grandeza fue ' + max(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))
     print('La escena de menor grandeza fue ' + min(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))
+    print('El promedio de grandeza de todo el espectaculo fue de ' + str(lineal.get_avg(all_scenes, lineal.scenes_to_greatness)))

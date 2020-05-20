@@ -79,3 +79,5 @@ def list_duplicates(lst, pack=False):
         return D
     else:
         return list(chain.from_iterable(D))
+
+print(list_duplicates([1,2,3], True))
