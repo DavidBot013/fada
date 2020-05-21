@@ -5,8 +5,9 @@ from itertools import chain
 # Ordena una lista de tuplas en orden ascendente en O(n).
 # Cada tupla tiene la forma (llave:valor) valor es un entero de 0 a k
 def sort(lista, k):
-    #print(lista, k)
-    #exit()
+    if k > len(lista):
+        lista += [('?', 0)]*(k-len(lista))
+
     C = [0 for i in range(k+1)]
     B = [None for i in range(len(lista))]
     
@@ -20,7 +21,8 @@ def sort(lista, k):
         index = C[lista[j][1]] - 1
         B[index] = lista[j][0] # B solo contiene los animales.
         C[lista[j][1]] -= 1
-    return B
+    
+    return list(filter(lambda a: a != '?', B))
 
 """
 Retorna una lista de las mayores grandezas individuales de cada animal entre escenas
@@ -47,6 +49,7 @@ def remove_duplicates(list_of_scenes, animals_to_greatness):
         else:
             break
     
+    return sort(list(zip(x,y)), max(y))
 
 def list_duplicates(lst, pack=False):
     D = defaultdict(list)

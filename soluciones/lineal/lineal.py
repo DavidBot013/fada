@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import aux
 import cProfile
-
+import copy
 scenes_to_greatness = {}
 """ 
 Ordena las escenas que ocurren en la apertura.
@@ -14,7 +14,7 @@ def sort_opening_scenes_locally(opening, N, animals_dict):
     for scene in opening:
         tupl = [(animal, animals_dict[animal]) for animal in scene]
         great = [animals_dict[animal] for animal in scene]
-        sorted_opening.append(aux.sort(tupl,max(great)))
+        sorted_opening.append(aux.sort(copy.deepcopy(tupl),max(great)))
         
     return sorted_opening 
     
@@ -49,8 +49,7 @@ def sort_scenes(parts, animals_to_greatness):
         scenes_with_greatness[i] = (_scene[i], total)
 
     k = max(scenes_to_greatness.values())
-    parts[0] = aux.sort(scenes_with_greatness, k)
-
+    parts[0] = aux.sort(copy.deepcopy(scenes_with_greatness), k)
 
     parts_greatness = []
     for j,part in enumerate(parts[1:]): # O(m-1)
@@ -61,16 +60,15 @@ def sort_scenes(parts, animals_to_greatness):
         for scene in part: # O((m-1)k) 
             _scenes_with_greatness.append((scene, scenes_to_greatness[str(scene)])) 
 
-        parts[j+1] = aux.sort(_scenes_with_greatness, k) 
+        parts[j+1] = aux.sort(copy.deepcopy(_scenes_with_greatness), k) 
         
-
         # Solo las grandezas de scenes_with_greatness
         _greatness = list(zip(*_scenes_with_greatness))[1] #O((m-1)k)
 
         # A la lista que lleva cuenta de las grandezas de cada parte se le asigna
         # la sumatoria de las grandezas calculadas anteriormente.
         parts_greatness.append(sum(_greatness)) 
-        
+         
         # Empates
         draws = aux.list_duplicates(_greatness, True)# O(k)
         if draws:
@@ -88,7 +86,7 @@ Ordena las partes después de la apertura de acuerdo a sus gradezas totales.
 """
 def sort_parts(parts, parts_greatness):
     parts_with_greatness = list(zip(parts[1:], parts_greatness))
-    parts[1:] = aux.sort(parts_with_greatness, max(parts_greatness))
+    parts[1:] = aux.sort(copy.deepcopy(parts_with_greatness), max(parts_greatness))
 """
 Calcula que animales participaron más, cuales menos y en cuantas escenas
 """
