@@ -90,7 +90,7 @@ def sort_parts(parts, parts_greatness):
     parts_with_greatness = list(zip(parts[1:], parts_greatness))
     parts[1:] = aux.sort(parts_with_greatness, max(parts_greatness))
 """
-Calcula que animales participaron más y en cuantas escenas
+Calcula que animales participaron más, cuales menos y en cuantas escenas
 """
 def get_animal_ocurrences(all_scenes, animals, operator):
     animals_to_ocurrences = {animal:0 for animal in animals} 

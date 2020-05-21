@@ -46,10 +46,29 @@
 					con Counting Sort. Al finalizar el ciclo externo las escenas dentro de cada parte están ordenadas ascendentemente.
 
 					\begin{enumerate}
-						\item Empates: se buscan y se resuelven cada que se ordenan las escenas de una parte. Para detectarlos se itera sobre
-							todas las escenas
+						\item Empates: se buscan y se resuelven cada que se ordenan las escenas de una parte. Para detectarlos se usa una función
+							que detecta duplicados en una lista utilizando la librería \texttt{collections}. Una vez se saben los indices de los 
+							elementos repetidos, se utiliza la función \texttt{remove\_duplicates} que remueve los duplicados con un \texttt{while}
+							que va "en reversa" empezando en $i=2$ hasta $0$, $i$ se usa para acceder una tabla hash que mapea animales a grandezas.
+
 					\end{enumerate}
-				\item Ordenar las partes:
+				\item Ordenar las partes: para ordenar las partes es necesario saber las grandezas de cada parte, lo cual se hace en el paso
+					anterior cada que se va iterando sobre cada parte y se van almacenando los valores una en una lista. \texttt{sort\_parts}
+					entonces fusiona las $m-1$ partes con sus grandezas, generando una lista de tuplas (parte, grandeza) que se le pasa
+					como parametro a la función de ordenar.
+				\item Estadísticas del evento: 
+					\begin{enumerate}
+						\item Animal más popular y menos popular: se utiliza una lista de todas
+						las escenas que ocurren en el evento (con apertura y las demás partes) y la lista de animales del evento. Con ambas se construye
+						una tabla hash que mapea animales a número de veces que aparecieron en escena, como candidato para animal más popular y menos popular
+						se tiene obviamente al elemento máximo y mínimo de los valores de la tabla hash, para no dejar por fuera ningún otro animal
+						se itera sobre la tabla hash buscando animales distintos al candidato y cuyas apariciones sean iguales a las del candidato. 
+						\item Promedio de grandeza del evento: se itera sobre la lista de todas las escenas que tuvieron lugar, se suman sus grandezas
+							y se divide entre el número de escenas que se mostraron. Lo mismo también puede lograrse con las partes y sus grandezas.
+
+						\item Escenas de mayor y menor grandeza: se calcula el elemento más grande y más pequeño en la tabla hash que mapea escenas
+							a sus grandezas.
+					\end{enumerate}
 			\end{enumerate}
 			\textbf{Estructuras de datos utilizadas:} Listas, tablas hash, tuplas\\
 			\textbf{Algoritmo de ordenamiento:} Counting Sort para listas de tuplas (animal, grandeza)\\
@@ -58,8 +77,11 @@
 		\subsection{$O(n^2)$}
 		\subsection{$O(n*\log(n))$}
 		\subsection{$O(n)$}
-	\section{Instrucciones para la ejecución}
-
+		\section[title]{Instrucciones para la ejecución\footnote{Si se quiere utilizar una entrada propia, por favor revisar el formato de las entradas ya hechas.}}
+		\subsection{$O(n^2)$}
+		\subsection{$O(n*\log(n))$}
+		\subsection{$O(n)$}
+			\texttt{./lineal.py run.py <nombre-archivo-entrada>}
 	\section{Sets de prueba}
 
 	\section{Conclusiones del proyecto}

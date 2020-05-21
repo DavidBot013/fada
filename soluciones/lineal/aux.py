@@ -47,28 +47,6 @@ def remove_duplicates(list_of_scenes, animals_to_greatness):
         else:
             break
     
-    return sort(list(zip(x, y)), max(y))
-    # scenes_to_indv_greatness = {
-    #         str(scene):(animals_to_greatness[scene[0]], 
-    #                     animals_to_greatness[scene[1]], 
-    #                     animals_to_greatness[scene[2]])
-    #         for scene in list_of_scenes
-    #         } #O((m-1)k) ó O(k)
-    # 
-    # 
-    # result = (list(scenes_to_indv_greatness.items()))
-   
-    # while True:
-    #     seq = (tupl[1][-1] for tupl in result)
-    #     duplicates_index = list(chain.from_iterable(list_duplicates(seq)))
-    #     if duplicates_index:
-    #         for index in duplicates_index:
-    #             result[index] = (result[index][0], result[index][1][:-1])
-    #     else:
-    #         break
-
-    # return [(list(tupl[0]), tupl[1][-1]) for tupl in result]
-
 
 def list_duplicates(lst, pack=False):
     D = defaultdict(list)
