@@ -1,12 +1,21 @@
-import sys, json
+import json, itertools
 
+"""
+Variables Iniciales
+"""
 n=0
 m=0
 k=0
 animales = {}
 apertura = []
 parte=[]
-
+escenaMenorGrandeza = []
+escenaMayorGrandeza = []
+promedio = 0
+"""
+procesar_entrada(): Archivo -> Entero, Lista y Diccionario
+Transcribe el archivo a enteros,diccionario o lista
+"""
 def procesar_entrada(archivo):
     global n,m,k,animales, apertura, parte
     with open(archivo) as _input:
@@ -22,9 +31,11 @@ def procesar_entrada(archivo):
     apertura = json.loads(lineas[5])
     parte = [json.loads(lineas[i]) for i in range(6, (m-1)+6)]
 
-escenaMenorGrandeza = []
-escenaMayorGrandeza = []
-
+"""
+ordenarEscena(): Array -> Array
+Recorre la lista comparando y ordenando la escena en orden ascendente de grandeza del animal
+Complejidad:O(6) = O(1)
+"""
 def ordenarEscena(array):
   for i in range(0,3):
     for j in range(i+1, 3):
@@ -34,9 +45,20 @@ def ordenarEscena(array):
         array[j]=aux
   return array
 
+"""
+auxEscenas(): Array -> Entero
+Recibe un array de animales y suma las grandezas para obtener la grandeza total de la escena
+"""
 def auxEscenas(array):
   return animales[array[0]]+animales[array[1]]+animales[array[2]]
 
+"""
+ordenarEscenas(): Array -> Array
+Recorre la lista comparando y ordenando las escenas en orden ascendente dependiento
+de la grandeza de la escena
+Complejidad:O(((m-1)k)^2) = O(k^2) = O(n^2)
+ya que m puede valer maximo 60 es despreciable comparado con k que puede llegar a valer n
+"""
 def ordenarEscenas(array):
   for i in range(0,len(array)):
     for j in range(i+1, len(array)):
@@ -52,11 +74,18 @@ def ordenarEscenas(array):
         array[i]=array[j]
         array[j]=aux
   return array
-
+"""
+ordenarApertura(): -> Entero, Entero
+Funcion principal para ordenar la apertura, crea una array auxiliar para almacenar
+la apertura con las escenas a ordenadas, despues ordena cada escena, por ultimo
+obtiene el primer y ultimo valor los cuales son correspondientes a la escena
+con menor y mayor grandeza respectivamente
+Complejidad:O(n^2)
+"""
 def ordenarApertura():
-  aux=ordenarEscenas(apertura)
+  aux=ordenarEscenas(apertura)  
   for i in range((m-1)*k):
-    ordenarEscena(aux[i])
+    ordenarEscena(aux[i])       
   print("Apertura:", aux, "\n")
   global escenaMenorGrandeza
   global escenaMayorGrandeza
@@ -64,12 +93,21 @@ def ordenarApertura():
   escenaMayorGrandeza = aux[len(aux)-1]
   return escenaMayorGrandeza, escenaMenorGrandeza
 
+"""
+auxOrdenarPartes(): Array -> Entero
+Calcular la grandeza total de la parte
+Complejidad:O(n)
+"""
 def auxOrdenarPartes(array):
   aux = 0
   for i in range(0, len(array)):
     aux = aux + auxEscenas(array[i])
   return aux
-
+"""
+partesOrdenadas(): Array -> Entero
+Con el valor obtenido en auxOrdenarPartes compara para ordenar las partes en orden ascendente
+Complejidad:O(n^2)
+"""
 def partesOrdenadas(array):
   for i in range(0,len(array)):
     for j in range(i+1, len(array)):
@@ -79,7 +117,12 @@ def partesOrdenadas(array):
         array[j]=aux
   return array
 
-
+"""
+ordenarPartes():  -> String, Lista
+Funcion principal para ordenar las partes, crea una array auxiliar para almacenar
+las partes ya ordenadas, despues ordena cada escena y por ultimo ordena la escena
+Complejidad:O(n^2+mn^2+6(m-1)k) = O(2mn)
+"""
 def ordenarPartes():
   aux = partesOrdenadas(parte)
   for i in range(0,m-1):
@@ -88,14 +131,46 @@ def ordenarPartes():
       ordenarEscena(aux[j])
     print("Parte:", aux, "\n")
 
+def promedioGrandeza():
+  global promedio
+  for i in range(0,len(apertura)):
+    promedio = promedio + auxEscenas(apertura[i])
+  promedio = promedio/(m*k-k)
 
+def aparicion(operator):
+  aux = list(itertools.chain(*apertura))
+  numero = 0
+  candidato= operator(set(aux), key=aux.count)
+  for i in range(0,len(aux)):
+    if candidato == aux[i]:
+      numero=numero+1
+  candidato = []
+  for i in range(0,len(aux)):
+    flag=0
+    for j in range(0,len(aux)):
+      if aux[i]==aux[j]:
+        flag=flag + 1
+    if flag == numero:
+      candidato.append(aux[i])
+  listaCandidatos = []
+  for i in candidato:
+    if i not in listaCandidatos:
+      listaCandidatos.append(i)
+  return listaCandidatos, numero*2
+  
 
 def zoo(archivo):
+  global promedio
   procesar_entrada(archivo)
   ordenarApertura()
   ordenarPartes()
+  print("El animal que participo en mas escenas dentro del espectaculo fue el ", aparicion(max)[0], " con", aparicion(max)[1] ,"escenas","\n")
+  print("El animal que participo en menos escenas dentro del espectaculo fue el ", aparicion(min)[0], " con", aparicion(min)[1] ,"escenas","\n")
   #
   #
   print("La escena de menor grandeza total fue la escena", escenaMenorGrandeza, "\n")
   print("La escena de mayor grandeza total fue la escena", escenaMayorGrandeza, "\n")
-  #
+  promedioGrandeza()
+  print("El promedio de grandeza de todo el espectaculo fue de ", promedio, "\n")
+
+zoo("input2")
