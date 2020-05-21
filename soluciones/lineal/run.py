@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import sys, json
+import ast
+import sys
 import itertools
-import cProfile
 import lineal
 
 def solve():
@@ -10,12 +10,13 @@ def solve():
     
     N,M,K= int(lines[0]), int(lines[1]), int(lines[2]) 
     
-    animals = json.loads(lines[3])
-    greatness = json.loads(lines[4])
+    
+    animals = ast.literal_eval(lines[3])
+    greatness = ast.literal_eval(lines[4])
     animals_dict = dict(zip(animals, greatness)) # Diccionario (animal:grandeza) O(N)
     
 
-    parts = [json.loads(lines[i]) for i in range(5, len(lines))]
+    parts = [ast.literal_eval(lines[i]) for i in range(5, len(lines))]
     lineal.sort_rest_of_scenes_locally(parts, N, animals_dict) 
     lineal.sort_scenes(parts, animals_dict)
     
@@ -43,4 +44,5 @@ def solve():
     print('La escena de menor grandeza fue ' + min(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))
     print('El promedio de grandeza de todo el espectaculo fue de ' + str(lineal.get_avg(all_scenes, lineal.scenes_to_greatness)))
 
+#cProfile.run('solve()')
 solve()

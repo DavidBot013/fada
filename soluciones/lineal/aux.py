@@ -5,24 +5,23 @@ from itertools import chain
 # Ordena una lista de tuplas en orden ascendente en O(n).
 # Cada tupla tiene la forma (llave:valor) valor es un entero de 0 a k
 def sort(lista, k):
-    if k > len(lista):
-        lista += [('?', 0)]*(k-len(lista))
-
-    C = [0 for i in range(k+1)]
-    B = [None for i in range(len(lista))]
+    n = len(lista)
     
-    for j in range(len(lista)):
+    C = [0 for i in range(k+1)]
+    B = [None for i in range(n)]
+    
+    for j in range(n):
         C[lista[j][1]] += 1
     
     for i in range(1,k+1):
         C[i] = C[i] + C[i-1]
     
-    for j in range(len(lista)-1, -1,-1):
+    for j in range(n-1, -1,-1):
         index = C[lista[j][1]] - 1
         B[index] = lista[j][0] # B solo contiene los animales.
         C[lista[j][1]] -= 1
     
-    return list(filter(lambda a: a != '?', B))
+    return B
 
 """
 Retorna una lista de las mayores grandezas individuales de cada animal entre escenas
