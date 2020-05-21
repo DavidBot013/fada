@@ -1,5 +1,5 @@
 import json, itertools
-
+import sys
 """
 Variables Iniciales
 """
@@ -208,3 +208,4 @@ def zoo(archivo):
 Para inciar el programa escribir en la linea de comando o al final del programa
 zoo("nombre del archivo")
 """
+zoo(sys.argv[1])
