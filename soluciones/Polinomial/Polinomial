@@ -63,12 +63,22 @@ def ordenarEscenas(array):
   for i in range(0,len(array)):
     for j in range(i+1, len(array)):
       if auxEscenas(array[i]) == auxEscenas(array[j]):
-        max1 = animales[ordenarEscena(array[i])[2]]
-        max2 = animales[ordenarEscena(array[j])[2]]
-        if max1 > max2:
+        if animales[ordenarEscena(array[i])[2]] > animales[ordenarEscena(array[j])[2]]:
           aux = array[i]
           array[i]=array[j]
           array[j]=aux
+        elif animales[ordenarEscena(array[i])[1]] > animales[ordenarEscena(array[j])[1]]:
+          aux = array[i]
+          array[i]=array[j]
+          array[j]=aux
+        elif animales[ordenarEscena(array[i])[0]] > animales[ordenarEscena(array[j])[0]]:
+          aux = array[i]
+          array[i]=array[j]
+          array[j]=aux
+        else:
+          aux = array[j]
+          array[j]=array[i]
+          array[i]=aux
       elif auxEscenas(array[i]) > auxEscenas(array[j]):
         aux = array[i]
         array[i]=array[j]
@@ -121,7 +131,7 @@ def partesOrdenadas(array):
 ordenarPartes():  -> String, Lista
 Funcion principal para ordenar las partes, crea una array auxiliar para almacenar
 las partes ya ordenadas, despues ordena cada escena y por ultimo ordena la escena
-Complejidad:O(n^2+mn^2+6(m-1)k) = O(2mn)
+Complejidad:O(n^2+mn^2+6(m-1)k) = O(2mn^2+6k(m-1)) = O(n^2+n) = O(n^2)
 """
 def ordenarPartes():
   aux = partesOrdenadas(parte)
@@ -130,17 +140,35 @@ def ordenarPartes():
     for j in range(0,len(parte[i])):
       ordenarEscena(aux[j])
     print("Parte:", aux, "\n")
-
+"""
+promedioGrandeza():  -> Entero
+Calculamos el promedio de la apertura el cual es el mismo que el promedio del espectaculo
+ya que la apertura tiene (m-1)k escenas y hay (m-1) partes con k escenas por lo cual las partes tiene (m-1)k escenas, y tambien como en las partes deben estar escenas de la
+apertura podemos concluir que en el evento la cantidad de escenas es de escenas de la apertura * 2 y que la suma total de la grandeza del evento es de grandeza de
+la apertura * 2, en el promedio podemos "cancelar" el 2 y podemos notar que es el promedio de la apertura
+Complejidad:O(n)
+"""
 def promedioGrandeza():
   global promedio
   for i in range(0,len(apertura)):
     promedio = promedio + auxEscenas(apertura[i])
   promedio = promedio/(m*k-k)
-
+"""
+aparicion():  -> ,Entero
+Funcion que nos ayuda a saber que animal aparecio mas veces o menos veces y cuantas veces fue eso. La conclucion anterior se puede aplicar aqui tambien ya que el animal
+que aparezca mas/menos en la apertura sera el mismo que aparecera mas/menos
+en el evento y su numero de apariciones sera de 2/apariciones en el evento.
+La funcion nos ayuda a "desencadenar" la lista de la apertura, para despues encontrar 
+que elemento se repite mas/menos, sabiendo que elemento se repita mas/menos usamos un
+bucle para contar cuantas veces aparece, y despues con el numero que obtenemos
+buscamos otros elementos que se repitan la misma cantidad de veces, por ultimo 
+eliminamos los elementos repetidos
+Complejidad:O(n+n+n+n^2+constante) = O(3n+n^2) = O(n^2)
+"""
 def aparicion(operator):
-  aux = list(itertools.chain(*apertura))
+  aux = list(itertools.chain(*apertura))      #O(n)
   numero = 0
-  candidato= operator(set(aux), key=aux.count)
+  candidato= operator(set(aux), key=aux.count)  #O(n)
   for i in range(0,len(aux)):
     if candidato == aux[i]:
       numero=numero+1
@@ -158,7 +186,12 @@ def aparicion(operator):
       listaCandidatos.append(i)
   return listaCandidatos, numero*2
   
-
+"""
+zoo(): Archivo -> Strings, Listas, Enteros
+Funcion principal para iniciar todo el programa, su funcion simplemente es
+llamar a las demas funciones
+Complejidad:O(n^2)
+"""
 def zoo(archivo):
   global promedio
   procesar_entrada(archivo)
@@ -166,11 +199,12 @@ def zoo(archivo):
   ordenarPartes()
   print("El animal que participo en mas escenas dentro del espectaculo fue el ", aparicion(max)[0], " con", aparicion(max)[1] ,"escenas","\n")
   print("El animal que participo en menos escenas dentro del espectaculo fue el ", aparicion(min)[0], " con", aparicion(min)[1] ,"escenas","\n")
-  #
-  #
   print("La escena de menor grandeza total fue la escena", escenaMenorGrandeza, "\n")
   print("La escena de mayor grandeza total fue la escena", escenaMayorGrandeza, "\n")
   promedioGrandeza()
   print("El promedio de grandeza de todo el espectaculo fue de ", promedio, "\n")
 
-zoo("input2")
+"""
+Para inciar el programa escribir en la linea de comando o al final del programa
+zoo("nombre del archivo")
+"""
