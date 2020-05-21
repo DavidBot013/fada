@@ -1,0 +1,9 @@
+9
+4
+3
+["Tiburon Sierra", "Tiburon Peregrino", "Tiburon Ballena", "Tollo Cigarro", "Tiburon Azotador", "Tiburo Tigre","Tiburo Toro","Tiburon Martilo","Tiburo Blanco"]
+[5, 7, 8, 9, 10, 12, 14, 15, 16]
+[["Tiburon Sierra", "Tiburon Peregrino", "Tiburon Ballena"], ["Tiburo Tigre", "Tiburo Toro", "Tiburon Azotador"], ["Tiburo Toro", "Tollo Cigarro", "Tiburon Ballena"], ["Tollo Cigarro", "Tiburo Blanco", "Tiburon Azotador"], ["Tiburo Toro", "Tiburon Ballena", "Tiburo Blanco"], ["Tiburon Sierra", "Tiburon Martilo", "Tiburo Blanco"], ["Tiburon Sierra", "Tiburo Blanco", "Tiburon Azotador"], ["Tollo Cigarro", "Tiburo Tigre", "Tiburo Toro"], ["Tiburo Toro", "Tiburon Martilo", "Tiburo Blanco"]]
+[["Tiburon Sierra", "Tiburon Peregrino", "Tiburon Ballena"], ["Tollo Cigarro", "Tiburo Blanco", "Tiburon Azotador"], ["Tiburo Tigre", "Tiburo Toro", "Tiburon Azotador"]]
+[["Tiburo Toro", "Tollo Cigarro", "Tiburon Ballena"], ["Tiburon Sierra", "Tiburon Martilo", "Tiburo Blanco"], ["Tiburon Sierra", "Tiburo Blanco", "Tiburon Azotador"]]
+[["Tiburo Toro", "Tiburon Ballena", "Tiburo Blanco"], ["Tollo Cigarro", "Tiburo Tigre", "Tiburo Toro"], ["Tiburo Toro", "Tiburon Martilo", "Tiburo Blanco"]]
