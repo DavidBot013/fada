@@ -5,3 +5,4 @@ tags
 *.fdb_latexmk
 *.fls
 soluciones/lineal/__pycache__/*
+soluciones/lineal/*.dat
