@@ -1,8 +1,9 @@
 6
+4
 2
-2
-["leon", "zorro", "cocodrilo", "jaguar", "delfin", "pinguino"]
-[7, 8, 6, 9, 10, 11]
-[["jaguar", "cocodrilo", "zorro"], ["delfin", "cocodrilo", "leon"]]
-[["jaguar", "cocodrilo", "zorro"], ["delfin", "cocodrilo", "leon"]]
-[["jaguar", "cocodrilo", "zorro"], ["delfin", "cocodrilo", "leon"]]
+["loro", "perro", "cabra", "mono", "koala", "jaguar"]
+[3,2,5,6,7,8]
+[["loro", "mono", "cabra"],["cabra", "perro", "koala"],["jaguar", "loro", "cabra"],["jaguar", "perro", "mono"],["perro", "mono", "koala"],["jaguar", "perro", "cabra"]]
+[["loro", "mono", "cabra"],["cabra", "perro", "koala"]]
+[["jaguar", "loro", "cabra"],["jaguar", "perro", "mono"]]
+[["perro", "mono", "koala"],["jaguar", "perro", "cabra"]]
