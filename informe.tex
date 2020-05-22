@@ -22,10 +22,20 @@
 			\textbf{Lenguaje en el que se implementó:} Python
 		
 		\subsection{$O(n*\log(n))$}
-			\textbf{Idea de la solución:}\\
+			\textbf{Idea de la solución:}
+			En la descripción del problema tenemos una serie de elementos que, de alguna manera, hay que ordenarlos para dar con el espectáculo 
+			final. Al tener que organizar ascendentemente los escenarios de acuerdo a las grandezas de cada animal, además de organizar las partes
+			acorde a las grandezas de las escenas que conlleva, se considera que este problema se puede llevar a cabo mediante el ordenamiento de Merge Sort,
+			cuando ya tengamos definido las características de los animales, estos serán almacenados en arreglos, tanto nombres en un arreglo, 
+			como grandezas respectivas en otro arreglo, los cuales serán los datos de entrada.\\
+			Ya organizados los animales en un escenario por una función auxiliar, esta misma es llamada dentro del Merge Sort,
+			con esto estamos organizando las partes finales acorde a operaciones como tamaños de medias de grandezas de los escenarios. 
+			Extrayendo los datos, podemos obtener la media total de grandeza, el animal que mas participo, escena de mayor grandeza, 
+			menor grandeza así como el que menos lo hizo mediante contadores, abstracción y almacenamiento en nuevos arreglos de 
+			los resultados finales, cada operación con su respectiva función dentro del algoritmo.\\\\
 			\textbf{Estructuras de datos utilizadas:} \\
-			\textbf{Algoritmo de ordenamiento:}\\
-			\textbf{Lenguaje en el que se implementó:}
+			\textbf{Algoritmo de ordenamiento:}Merge Sort\\
+			\textbf{Lenguaje en el que se implementó:} Python\\
 		\subsection{$O(n)$}
 			\textbf{Idea de la solución:} Después de recolectar los datos de entrada se construye un diccionario que mapea 
 			animales a sus respectivas grandezas a partir de la lista de animales y grandezas que se pasaron como parametro de
@@ -82,9 +92,9 @@
 				\begin{axis}[
 					title={Tiempo de ejecución vs Tamaño de la entrada},
 					xlabel={Tamaño de la entrada(n)},
-					ylabel={Tiempo de ejecución (s)},
-					xmin=0, xmax=100,
-					ymin=0, ymax=1,
+					ylabel={Tiempo de ejecución (segundos)},
+					xmin=0, xmax=60,
+					ymin=0, ymax=2,
 					xtick={},
 					ytick={},
 					ymajorgrids=true,
@@ -95,7 +105,7 @@
 					mark=square,
 					]
 					coordinates {
-						(9,0.05)(15,0.06)(20,0.07)(100,0.9)
+						(6,0.08)(9,0.08)(15,0.087)(20,0.087)(60,1.435)
 					};
 
 				\end{axis}
