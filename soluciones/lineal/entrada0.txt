@@ -1,8 +1,0 @@
-6
-3
-2
-["hormiga", "loro", "caballo", "vaca", "mono", "elefante"]
-[1, 2, 3, 4, 5, 6]
-[["caballo", "hormiga", "elefante"], ["vaca", "loro", "caballo"], ["elefante", "mono", "caballo"], ["caballo", "loro", "elefante"]]
-[["elefante", "mono", "caballo"], ["vaca", "loro", "caballo"]]
-[["caballo", "hormiga", "elefante"], ["elefante", "mono", "caballo"]]
