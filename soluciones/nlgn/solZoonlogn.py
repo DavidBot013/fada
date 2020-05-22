@@ -1,5 +1,5 @@
 from time import time
-
+import sys
 #Métodos utilizados para ordenamiento
 
 def escenas(A,down,high): 
@@ -168,9 +168,9 @@ if __name__ == '__main__':
 
     media = 0
 
-    archivo = open('entrada.txt', 'r')
+    archivo = open(sys.argv[1], 'r')
     
-    with open('entrada.txt', 'r') as procfile:
+    with open(sys.argv[1], 'r') as procfile:
         for line in procfile:
             if line.split() != []:
                 lista.append(line.replace(';','').replace('{','[').replace('}',']').replace("'",'').split()[2:])
