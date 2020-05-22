@@ -110,7 +110,7 @@
 
 				\end{axis}
 			\end{tikzpicture}
-		\section[title]{Instrucciones para la ejecución\footnote{Si se quiere utilizar una entrada propia, por favor revisar el formato de las entradas ya hechas.}}
+			\section[title]{Instrucciones para la ejecución}
 		\subsection{$O(n^2)$}
 		En la linea de comandos o al final del programa escribir zoo("nombre del archivo a ejectura")
 		\subsection{$O(n*\log(n))$}		
@@ -119,6 +119,11 @@
 		Si desea cambiar y probar con otra entrada, el archivo \texttt{file.py} es un programa que modifica a entrada.txt, con los valores para n,m,k, animales y grandezas que usted elija, inclusive en este documento encontrará tests con los cuales hemos probado, con sus respectivas medidas de tiempo de ejecución. Si quiere modificar la entrada manualmente, aquí hay algunos ejemplos de pruebas realizadas con anterioridad, solo tiene que copiar alguno de estos ejemplos en el archivo de entrada.txt y así reemplazar el contenido que esté ya tenía.
 		\subsection{$O(n)$}
 			\texttt{./run.py <nombre-archivo-entrada>}
+		\subsection{Instrucciones para generar entradas}
+		\begin{itemize}
+			\item Para generar entradas de la solución cuadrática y lineal, ejecutar el archivo \texttt{./generar.py <valor-n> <valor-m> <valor-k>}
+			\item Para generar entradas de la solución $n\log(n)$ ejecutar el archivo \texttt{file.py} dentro de la carpeta \texttt{nlgn}
+			\end{itemize}
 	\section{Sets de prueba}
 		Se encuentran dentro de la carpeta \texttt{/entradas}
 	\section{Conclusiones del proyecto}
