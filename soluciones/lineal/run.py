@@ -13,6 +13,7 @@ def solve():
     
     animals = ast.literal_eval(lines[3])
     greatness = ast.literal_eval(lines[4])
+    greatness = [int(i) for i in greatness]
     animals_dict = dict(zip(animals, greatness)) # Diccionario (animal:grandeza) O(N)
     
 
@@ -44,5 +45,4 @@ def solve():
     print('La escena de menor grandeza fue ' + min(lineal.scenes_to_greatness, key=lineal.scenes_to_greatness.get))
     print('El promedio de grandeza de todo el espectaculo fue de ' + str(lineal.get_avg(all_scenes, lineal.scenes_to_greatness)))
 
-#cProfile.run('solve()')
 solve()

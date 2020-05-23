@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import sys
 import random
-import itertools
 
 n = int(sys.argv[1])
 m = int(sys.argv[2])
@@ -48,6 +47,7 @@ for i in range((m-1)*k):
 count = [0]*len(OPENING)
 
 while 0 in count:
+    PARTS = []
     for i in range(m-1):
         part = []
         for j in range(k):
@@ -66,6 +66,6 @@ with open("problem.txt", "w") as file:
     file.write(str(k) +'\n')
     file.write(str(ANIMALES)+'\n')
     file.write(str(GRANDEZAS)+'\n')
-    file.write(str(OPENING)+'\n')
+    file.write('\n'+str(OPENING))
     for part in PARTS:
-        file.write(str(part) + '\n')
+        file.write('\n'+str(part))
