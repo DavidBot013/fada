@@ -16,7 +16,7 @@
 		se ordena esta estructura de acuerdo a los valores de las grandezas y se guarda utiliza para armar las
 		escenas de todas las partes del evento.\\	
 		\subsection{$O(n^2)$}
-			\textbf{Idea de la solución:}una vez que obtenemos el archivo lo descomponemos para obtener los valores de n, m, k, los animales participantes con sus grandezas, la apertura y las partes. Los animales participantes y grandeza se guardaron en un diccionario con los nombres de los animales como keys, las partes y la apertura como listas, y n,m, y k como enteros. Después se procedió de la siguiente forma:
+			\textbf{Idea de la solución:} una vez que obtenemos el archivo lo descomponemos para obtener los valores de n, m, k, los animales participantes con sus grandezas, la apertura y las partes. Los animales participantes y grandeza se guardaron en un diccionario con los nombres de los animales como keys, las partes y la apertura como listas, y n,m, y k como enteros. Después se procedió de la siguiente forma:
 			\begin{enumerate}
 				\item Apertura: para ordenar la apertura primero ordenaremos las escenas de la apertura, la manera en la que se ordena consiste en dos bucles que van recorriendo la lista comparando, esta lista la guardamos en un lista auxiliar, en la lista ya arreglada usamos un bucle para recorrer las escenas y ordenarlas en términos de la grandeza de los animales.
 				\item Partes: primero ordenaremos las partes por su grandeza total, después recorreremos la lista y ordenaremos cada parte internamente por la grandeza de la escena y por último se ordenan por la grandeza de los animales.
