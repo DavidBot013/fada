@@ -20,7 +20,7 @@ for i in range(n):
     
     greatness = input("Inserte la grandeza del animal: ")
     while greatness in GRANDEZAS:
-        print('Todas las grandezas deben ser distintas, ', end=' ')
+        print('Todas las grandezas deben ser distintas, ')
         greatness = input("inserte la grandeza del animal")
 
     ANIMALES.append(animal)
@@ -44,18 +44,21 @@ for i in range((m-1)*k):
         
     OPENING.append(scene)
 
-count = [0]*len(OPENING)
+count = [0]*((m-1)*k)
 
 while 0 in count:
-    PARTS = []
+    if len(PARTS) >= ((m-1)*k):
+        PARTS=[]
     for i in range(m-1):
         part = []
         for j in range(k):
-            _scene = random.choice(OPENING)
+            index = random.randint(0,len(OPENING)-1)
+            _scene = OPENING[index]
             while _scene in part:
-                _scene = random.choice(OPENING)
-            
-            count[OPENING.index(_scene)] += 1
+                index = random.randint(0,len(OPENING)-1)
+                _scene = OPENING[index]
+          
+            count[index] += 1
             part.append(_scene)
 
         PARTS.append(part)
