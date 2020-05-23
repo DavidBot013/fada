@@ -65,7 +65,7 @@ with open("problem.txt", "w") as file:
     file.write(str(m) +'\n')
     file.write(str(k) +'\n')
     file.write(str(ANIMALES)+'\n')
-    file.write(str(GRANDEZAS)+'\n')
+    file.write(str(GRANDEZAS))
     file.write('\n'+str(OPENING))
     for part in PARTS:
         file.write('\n'+str(part))
