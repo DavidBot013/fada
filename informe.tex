@@ -28,7 +28,7 @@
 					p=\frac{2*grandezaApertura}{2*(m-1)*k} \rightarrow p=\frac{grandezaApertura}{(m-1)*k}
 				\end{equation}
 				en otras palabras el promedio de la apertura. Para sacar el promedio se usó una variable la cual hace uso de un bucle para recorrer la apertura y sumar la grandeza de cada animal y al final se divide por $(m-1)*k$
-			\end{enumerate}\\
+			\end{enumerate}
 			\textbf{Estructuras de datos utilizadas:} Listas, Diccionarios\\ 
 			\textbf{Algoritmo de ordenamiento:} Bucles\\
 			\textbf{Lenguaje en el que se implementó:} Python
@@ -97,13 +97,13 @@
 			\textbf{Algoritmo de ordenamiento:} Counting Sort para listas de tuplas (animal, grandeza)\\
 			\textbf{Lenguaje en el que se implementó:} Python
 	\section{Análisis de Resultados}
-		\subsection{$O(n^2)$} m=50, k=n/2\\
+		\subsection{$O(n^2)$}
             \begin{tikzpicture}
             \begin{axis}[
                 title={Tiempo de ejecución vs Tamaño de la entrada},
                 xlabel={Tamaño de la entrada(n)},
 				ylabel={Tiempo de ejecución (segundos)},
-                xmin=10, xmax=60,
+                xmin=10, xmax=61,
 				ymin=0, ymax=30,
                 xtick={},
                 ytick={},
@@ -117,22 +117,46 @@
                 mark=square,
                 ]
                 coordinates {
-                (10,1.31)(20,4.985)(30,10.92)(40,19.39)(50,26.94)
+					(10,0.918)(20,3.284)(40,12.37)(50,19.591)(60,27.941) 
                 };
-                
+				\addlegendentry{$m=50,\; k=n/2$}
             \end{axis}
             \end{tikzpicture}
 		\subsection{$O(n*\log(n))$}
+			\begin{tikzpicture}
+				\begin{axis}[
+					title={Tiempo de ejecución vs Tamaño de la entrada},
+					xlabel={Tamaño de la entrada(n)},
+					ylabel={Tiempo de ejecución (segundos)},
+					xmin=10, xmax=61,
+					ymin=0.05, ymax=0.5,
+					xtick={},
+					ytick={},
+					legend pos=north west,
+					ymajorgrids=true,
+					grid style=dashed,
+					]
+					\addplot[
+					color=green,
+					mark=square,
+					]
+					coordinates {
+						(10,0.09)(20,0.142)(40,0.282)(50,0.364)(60,0.486)
+					};
+					\addlegendentry{$m=50,\; k=n/2$}
+				\end{axis}
+			\end{tikzpicture}
 		\subsection{$O(n)$}
 			\begin{tikzpicture}
 				\begin{axis}[
 					title={Tiempo de ejecución vs Tamaño de la entrada},
 					xlabel={Tamaño de la entrada(n)},
 					ylabel={Tiempo de ejecución (segundos)},
-					xmin=0, xmax=60,
-					ymin=0, ymax=2,
+					xmin=10, xmax=61,
+					ymin=0.08, ymax=0.3,
 					xtick={},
 					ytick={},
+					legend pos=north west,
 					ymajorgrids=true,
 					grid style=dashed,
 					]
@@ -141,9 +165,9 @@
 					mark=square,
 					]
 					coordinates {
-						(20,0.137)(40,0.201)(50,0.235)(60,0.275)
+						(10,0.097)(20,0.137)(40,0.201)(50,0.235)(60,0.275)
 					};
-
+					\addlegendentry{$m=50,\; k=n/2$}
 				\end{axis}
 			\end{tikzpicture}
 		\section[title]{Instrucciones para la ejecución\footnote{Si se quiere utilizar una entrada propia, por favor revisar el formato de las entradas ya hechas.}}
