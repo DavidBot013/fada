@@ -16,7 +16,19 @@
 		se ordena esta estructura de acuerdo a los valores de las grandezas y se guarda utiliza para armar las
 		escenas de todas las partes del evento.\\	
 		\subsection{$O(n^2)$}
-			\textbf{Idea de la solución:}\\
+			\textbf{Idea de la solución:}una vez que obtenemos el archivo lo descomponemos para obtener los valores de n, m, k, los animales participantes con sus grandezas, la apertura y las partes. Los animales participantes y grandeza se guardaron en un diccionario con los nombres de los animales como keys, las partes y la apertura como listas, y n,m, y k como enteros. Después se procedió de la siguiente forma:
+			\begin{enumerate}
+				\item Apertura: para ordenar la apertura primero ordenaremos las escenas de la apertura, la manera en la que se ordena consiste en dos bucles que van recorriendo la lista comparando, esta lista la guardamos en un lista auxiliar, en la lista ya arreglada usamos un bucle para recorrer las escenas y ordenarlas en términos de la grandeza de los animales.
+				\item Partes: primero ordenaremos las partes por su grandeza total, después recorreremos la lista y ordenaremos cada parte internamente por la grandeza de la escena y por último se ordenan por la grandeza de los animales.
+				\item Explicación para resolver las apariciones, la escena de más/menos grandeza y el promedio: ya que la apertura tiene $(m-1)*k$ escenas y las partes combinadas todas tienen $(m-1)*k$ escenas, como también está la condición de que todas las escenas de las partes están en la apertura y viceversa. con esta premisa procederemos a resolver las apariciones, la escena de más/menos grandeza y el promedio.
+				\item Apariciones de animales: para saber qué animal apareció más/menos primero se "desencadenara" la lista de la apertura, para después encontrar que elemento se repite más/menos, sabiendo que elemento se repita más/menos usamos un bucle para contar cuantas veces aparece, y después con el número que obtenemos buscamos otros elementos que se repitan la misma cantidad de veces, por último eliminamos los elementos repetidos. El número de apariciones de un animal en el evento es de $2*apariciones$ en la apertura usando la premisa del punto 3.
+				\item Escenas de mayor/menor grandeza: usando también la premisa del punto 3 sabemos que la escena de mayor/menor grandeza del evento será la misma que de la apertura, entonces cuando se organizó la apertura en 1, simplemente para el mayor valor se obtuvo el último valor de la lista y para el menor valor se obtuvo el primer valor de la lista.
+				\item Promedio grandeza: al igual que 4 y 5 se usa la premisa 3. el  promedio de el evento es de 
+				\begin{equation}
+					p=\frac{2*grandezaApertura}{2*(m-1)*k} \rightarrow p=\frac{grandezaApertura}{(m-1)*k}
+				\end{equation}
+				en otras palabras el promedio de la apertura. Para sacar el promedio se usó una variable la cual hace uso de un bucle para recorrer la apertura y sumar la grandeza de cada animal y al final se divide por $(m-1)*k$
+			\end{enumerate}\\
 			\textbf{Estructuras de datos utilizadas:} Listas, Diccionarios\\ 
 			\textbf{Algoritmo de ordenamiento:} Bucles\\
 			\textbf{Lenguaje en el que se implementó:} Python
@@ -110,7 +122,7 @@
 
 				\end{axis}
 			\end{tikzpicture}
-			\section[title]{Instrucciones para la ejecución}
+		\section[title]{Instrucciones para la ejecución\footnote{Si se quiere utilizar una entrada propia, por favor revisar el formato de las entradas ya hechas.}}
 		\subsection{$O(n^2)$}
 		En la linea de comandos o al final del programa escribir zoo("nombre del archivo a ejectura")
 		\subsection{$O(n*\log(n))$}		
@@ -119,11 +131,6 @@
 		Si desea cambiar y probar con otra entrada, el archivo \texttt{file.py} es un programa que modifica a entrada.txt, con los valores para n,m,k, animales y grandezas que usted elija, inclusive en este documento encontrará tests con los cuales hemos probado, con sus respectivas medidas de tiempo de ejecución. Si quiere modificar la entrada manualmente, aquí hay algunos ejemplos de pruebas realizadas con anterioridad, solo tiene que copiar alguno de estos ejemplos en el archivo de entrada.txt y así reemplazar el contenido que esté ya tenía.
 		\subsection{$O(n)$}
 			\texttt{./run.py <nombre-archivo-entrada>}
-		\subsection{Instrucciones para generar entradas}
-		\begin{itemize}
-			\item Para generar entradas de la solución cuadrática y lineal, ejecutar el archivo \texttt{./generar.py <valor-n> <valor-m> <valor-k>}
-			\item Para generar entradas de la solución $n\log(n)$ ejecutar el archivo \texttt{file.py} dentro de la carpeta \texttt{nlgn}
-			\end{itemize}
 	\section{Sets de prueba}
 		Se encuentran dentro de la carpeta \texttt{/entradas}
 	\section{Conclusiones del proyecto}
