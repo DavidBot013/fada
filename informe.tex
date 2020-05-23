@@ -170,6 +170,49 @@
 					\addlegendentry{$m=50,\; k=n/2$}
 				\end{axis}
 			\end{tikzpicture}
+		\subsection{Gráficas de las complejidades combinadas.}
+            \begin{tikzpicture}
+            \begin{axis}[
+                title={Tiempo de ejecución vs Tamaño de la entrada},
+                xlabel={Tamaño de la entrada(n)},
+				ylabel={Tiempo de ejecución (segundos)},
+                xmin=10, xmax=61,
+				ymin=0, ymax=20,
+                xtick={},
+                ytick={},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+            
+            \addplot[
+                color=red,
+                mark=square,
+                ]
+                coordinates {
+					(10,0.918)(20,3.284)(40,12.37)(50,19.591)(60,27.941) 
+                };
+				\addlegendentry{$n^2$}
+
+			
+			\addplot[
+				color=blue,
+				mark=square,
+				]
+				coordinates {
+					(10,0.097)(20,0.137)(40,0.201)(50,0.235)(60,0.275)
+				};	
+			\addlegendentry{$n$}
+			\addplot[
+					color=green,
+					mark=square,
+					]
+					coordinates {
+						(10,0.09)(20,0.142)(40,0.282)(50,0.364)(60,0.486)
+					};	
+				\addlegendentry{$n\log(n)$}
+            \end{axis}
+            \end{tikzpicture}
 		\section[title]{Instrucciones para la ejecución\footnote{Si se quiere utilizar una entrada propia, por favor revisar el formato de las entradas ya hechas.}}
 		\subsection{$O(n^2)$}
 		En la linea de comandos o al final del programa escribir zoo("nombre del archivo a ejectura")
